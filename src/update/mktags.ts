@@ -1,5 +1,5 @@
 import { compact } from "../DateTime"
-import { ExifTool } from "../ExifTool"
+import { exiftool } from "../ExifTool"
 import { TagsTask } from "../TagsTask"
 import * as _fs from "fs"
 import * as _path from "path"
@@ -11,7 +11,6 @@ import * as process from "process"
 
 const globule = require("globule")
 
-require("longjohn")
 require("source-map-support").install()
 
 function ellipsize(str: string, max: number) {
@@ -154,8 +153,6 @@ function cmp(a: any, b: any): number {
 
 const tagMap = new TagMap()
 const saneTagRe = /^[a-z0-9_]+:[a-z0-9_]+$/i
-
-const exiftool = new ExifTool(8)
 
 async function readAndAddToTagMap(file: string) {
   try {
