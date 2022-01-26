@@ -1,6 +1,8 @@
-import { encode } from "he"
+import { he } from "./deps.ts"
 import { times } from "./Array.ts"
 import { Maybe } from "./Maybe.ts"
+
+const { encode } = he;
 
 export function isString(o: any): o is string {
   return typeof o === "string"
