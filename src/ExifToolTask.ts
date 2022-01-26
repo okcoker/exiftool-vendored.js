@@ -1,5 +1,5 @@
 import * as bc from "batch-cluster"
-import { notBlank, stripPrefix } from "./String"
+import { notBlank, stripPrefix } from "./String.ts"
 
 export abstract class ExifToolTask<T> extends bc.Task<T> {
   static renderCommand(args: string[]): string {

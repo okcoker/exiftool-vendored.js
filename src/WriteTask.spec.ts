@@ -1,13 +1,13 @@
-import { ExifDate } from "./ExifDate"
-import { ExifDateTime } from "./ExifDateTime"
-import { ExifTool, WriteTags } from "./ExifTool"
-import { isFileEmpty } from "./File"
-import { map } from "./Maybe"
-import { isSidecarExt } from "./Sidecars"
-import { stripSuffix } from "./String"
-import { Struct } from "./Struct"
-import { Tags } from "./Tags"
-import { expect, testFile, testImg } from "./_chai.spec"
+import { ExifDate } from "./ExifDate.ts"
+import { ExifDateTime } from "./ExifDateTime.ts"
+import { ExifTool, WriteTags } from "./ExifTool.ts"
+import { isFileEmpty } from "./File.ts"
+import { map } from "./Maybe.ts"
+import { isSidecarExt } from "./Sidecars.ts"
+import { stripSuffix } from "./String.ts"
+import { Struct } from "./Struct.ts"
+import { Tags } from "./Tags.ts"
+import { expect, testFile, testImg } from "./_chai.spec.ts"
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 

@@ -2,36 +2,36 @@ import * as bc from "batch-cluster"
 import * as _cp from "child_process"
 import * as _fs from "fs"
 import * as _os from "os"
-import * as _path from "path"
+import { path as _path } from "./deps.ts"
 import * as _p from "process"
-import { retryOnReject } from "./AsyncRetry"
-import { BinaryExtractionTask } from "./BinaryExtractionTask"
-import { BinaryToBufferTask } from "./BinaryToBufferTask"
-import { DeleteAllTagsArgs } from "./DeleteAllTagsArgs"
-import { ExifDate } from "./ExifDate"
-import { ExifDateTime } from "./ExifDateTime"
-import { ExifToolTask } from "./ExifToolTask"
-import { lazy } from "./Lazy"
-import { PreviewTag } from "./PreviewTag"
-import { ReadRawTask } from "./ReadRawTask"
-import { ReadTask } from "./ReadTask"
-import { RewriteAllTagsTask } from "./RewriteAllTagsTask"
-import { blank, notBlank } from "./String"
-import { Tags } from "./Tags"
-import { VersionTask } from "./VersionTask"
-import { WriteTask } from "./WriteTask"
+import { retryOnReject } from "./AsyncRetry.ts"
+import { BinaryExtractionTask } from "./BinaryExtractionTask.ts"
+import { BinaryToBufferTask } from "./BinaryToBufferTask.ts"
+import { DeleteAllTagsArgs } from "./DeleteAllTagsArgs.ts"
+import { ExifDate } from "./ExifDate.ts"
+import { ExifDateTime } from "./ExifDateTime.ts"
+import { ExifToolTask } from "./ExifToolTask.ts"
+import { lazy } from "./Lazy.ts"
+import { PreviewTag } from "./PreviewTag.ts"
+import { ReadRawTask } from "./ReadRawTask.ts"
+import { ReadTask } from "./ReadTask.ts"
+import { RewriteAllTagsTask } from "./RewriteAllTagsTask.ts"
+import { blank, notBlank } from "./String.ts"
+import { Tags } from "./Tags.ts"
+import { VersionTask } from "./VersionTask.ts"
+import { WriteTask } from "./WriteTask.ts"
 
-export { ExifDate } from "./ExifDate"
-export { ExifDateTime } from "./ExifDateTime"
-export { ExifTime } from "./ExifTime"
-export { ExifToolTask } from "./ExifToolTask"
-export { parseJSON } from "./JSON"
+export { ExifDate } from "./ExifDate.ts"
+export { ExifDateTime } from "./ExifDateTime.ts"
+export { ExifTime } from "./ExifTime.ts"
+export { ExifToolTask } from "./ExifToolTask.ts"
+export { parseJSON } from "./JSON.ts"
 export {
   offsetMinutesToZoneName,
   UnsetZone,
   UnsetZoneName,
   UnsetZoneOffsetMinutes,
-} from "./Timezones"
+} from "./Timezones.ts"
 export type { Tags }
 
 const isWin32 = lazy(() => _os.platform() === "win32")
@@ -182,7 +182,7 @@ export interface ExifToolOptions
   /**
    * Environment variables passed to ExifTool (besides `EXIFTOOL_HOME`)
    */
-  exiftoolEnv: NodeJS.ProcessEnv
+  exiftoolEnv: typeof Deno.env.toObject
 
   /**
    * Tag names (which can have '*' glob matchers) which you want numeric values,

@@ -1,9 +1,9 @@
-import { ApplicationRecordTags } from "./ApplicationRecordTags"
-import { ExifDate } from "./ExifDate"
-import { ExifDateTime } from "./ExifDateTime"
-import { ExifTime } from "./ExifTime"
-import { ICCProfileTags } from "./ICCProfileTags"
-import { Struct } from "./Struct"
+import { ApplicationRecordTags } from "./ApplicationRecordTags.ts"
+import { ExifDate } from "./ExifDate.ts"
+import { ExifDateTime } from "./ExifDateTime.ts"
+import { ExifTime } from "./ExifTime.ts"
+import { ICCProfileTags } from "./ICCProfileTags.ts"
+import { Struct } from "./Struct.ts"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

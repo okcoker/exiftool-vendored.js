@@ -1,4 +1,4 @@
-import { ExifToolTask } from "./ExifToolTask"
+import { ExifToolTask } from "./ExifToolTask.ts"
 
 export class VersionTask extends ExifToolTask<string> {
   private static readonly versionRegex = /^\d{1,3}\.\d{1,3}(\.\d{1,3}})?$/

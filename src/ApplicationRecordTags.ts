@@ -1,6 +1,6 @@
-import { ExifDate } from "./ExifDate"
-import { ExifDateTime } from "./ExifDateTime"
-import { ExifTime } from "./ExifTime"
+import { ExifDate } from "./ExifDate.ts"
+import { ExifDateTime } from "./ExifDateTime.ts"
+import { ExifTime } from "./ExifTime.ts"
 
 export interface ApplicationRecordTags {
   ApplicationRecordVersion?: number

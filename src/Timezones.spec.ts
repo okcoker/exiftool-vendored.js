@@ -1,9 +1,9 @@
-import { expect } from "./_chai.spec"
+import { expect } from "./_chai.spec.ts"
 import {
   extractOffset,
   extractTzOffsetFromTags,
   extractTzOffsetFromUTCOffset,
-} from "./Timezones"
+} from "./Timezones.ts"
 
 describe("Timezones", () => {
   describe("extractOffsetMinutes", () => {

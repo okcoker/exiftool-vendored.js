@@ -1,4 +1,4 @@
-import { MaybeNull } from "./Maybe"
+import { MaybeNull } from "./Maybe.ts"
 
 export function compact<T>(array: MaybeNull<T>[]): T[] {
   return array.filter((elem) => elem != null) as T[]

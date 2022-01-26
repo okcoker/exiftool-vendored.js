@@ -1,4 +1,4 @@
-import { map, Maybe } from "./Maybe"
+import { map, Maybe } from "./Maybe.ts"
 
 export function isNumber(n: any): n is number {
   return typeof n === "number" && isFinite(n)

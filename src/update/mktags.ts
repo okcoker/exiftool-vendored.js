@@ -4,15 +4,14 @@ import { Log, logger, setLogger } from "batch-cluster"
 import fs from "fs"
 import globule from "globule"
 import os from "os"
-import path from "path"
+import { path, ProgressBar } from "../deps.ts"
 import process from "process"
-import { compact, filterInPlace, times, uniq } from "../Array"
-import { ExifTool } from "../ExifTool"
-import { map, Maybe } from "../Maybe"
-import { isNumber } from "../Number"
-import { nullish } from "../ReadTask"
-import { blank, isString, leftPad } from "../String"
-import ProgressBar = require("progress")
+import { compact, filterInPlace, times, uniq } from "../Array.ts"
+import { ExifTool } from "../ExifTool.ts"
+import { map, Maybe } from "../Maybe.ts"
+import { isNumber } from "../Number.ts"
+import { nullish } from "../ReadTask.ts"
+import { blank, isString, leftPad } from "../String.ts"
 
 // ☠☠ THIS IS GRISLY, NASTY CODE. SCROLL DOWN AT YOUR OWN PERIL ☠☠
 

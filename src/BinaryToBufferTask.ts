@@ -1,7 +1,7 @@
-import path from "path"
-import { ExifToolTask } from "./ExifToolTask"
-import { Maybe } from "./Maybe"
-import { notBlank } from "./String"
+import { path, Buffer } from "./deps.ts"
+import { ExifToolTask } from "./ExifToolTask.ts"
+import { Maybe } from "./Maybe.ts"
+import { notBlank } from "./String.ts"
 
 /**
  * Task that returns an error string (to prevent retries), or undefined if

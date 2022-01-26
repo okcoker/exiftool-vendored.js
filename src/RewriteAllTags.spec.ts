@@ -1,7 +1,7 @@
-import path from "path"
-import { ExifDateTime } from "./ExifDateTime"
-import { ExifTool } from "./ExifTool"
-import { expect, testImg } from "./_chai.spec"
+import { path } from "./deps.ts"
+import { ExifDateTime } from "./ExifDateTime.ts"
+import { ExifTool } from "./ExifTool.ts"
+import { expect, testImg } from "./_chai.spec.ts"
 
 describe("RewriteAllTagsTask", () => {
   for (const opts of [

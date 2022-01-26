@@ -1,6 +1,6 @@
-import { expect } from "./_chai.spec"
-import { toExifString } from "./DateTime"
-import { ExifTime } from "./ExifTime"
+import { expect } from "./_chai.spec.ts"
+import { toExifString } from "./DateTime.ts"
+import { ExifTime } from "./ExifTime.ts"
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 

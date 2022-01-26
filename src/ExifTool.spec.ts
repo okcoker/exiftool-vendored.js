@@ -1,15 +1,17 @@
 import { BatchCluster } from "batch-cluster"
-import * as _path from "path"
-import { times } from "./Array"
-import { ExifDate } from "./ExifDate"
-import { ExifDateTime } from "./ExifDateTime"
-import { ExifTime } from "./ExifTime"
-import { DefaultMaxProcs, ExifTool, exiftool, WriteTags } from "./ExifTool"
-import { parseJSON } from "./JSON"
-import { keys } from "./Object"
-import { leftPad } from "./String"
-import { Tags } from "./Tags"
-import { expect, isWin32, testImg } from "./_chai.spec"
+import { path as _path } from "./deps.ts"
+import { times } from "./Array.ts"
+import { ExifDate } from "./ExifDate.ts"
+import { ExifDateTime } from "./ExifDateTime.ts"
+import { ExifTime } from "./ExifTime.ts"
+import { DefaultMaxProcs, ExifTool, exiftool, WriteTags } from "./ExifTool.ts"
+import { parseJSON } from "./JSON.ts"
+import { keys } from "./Object.ts"
+import { leftPad } from "./String.ts"
+import { Tags } from "./Tags.ts"
+import { expect, isWin32, testImg } from "./_chai.spec.ts"
+
+const __dirname = _path.dirname(_path.fromFileUrl(import.meta.url));
 
 function normalize(tagNames: string[]): string[] {
   return tagNames

@@ -1,6 +1,6 @@
-import * as _path from "path"
-import { compact } from "./Array"
-import { ExifToolTask } from "./ExifToolTask"
+import { path as _path } from "./deps.ts"
+import { compact } from "./Array.ts"
+import { ExifToolTask } from "./ExifToolTask.ts"
 
 export class RewriteAllTagsTask extends ExifToolTask<void> {
   private constructor(args: string[]) {

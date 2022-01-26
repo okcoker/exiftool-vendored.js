@@ -1,7 +1,7 @@
-import path from "path"
-import { ExifToolTask } from "./ExifToolTask"
-import { Maybe } from "./Maybe"
-import { toS } from "./String"
+import { path } from "./deps.ts"
+import { ExifToolTask } from "./ExifToolTask.ts"
+import { Maybe } from "./Maybe.ts"
+import { toS } from "./String.ts"
 
 const StdoutRe = /\b(\d+) output files? created/i
 

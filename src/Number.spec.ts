@@ -1,5 +1,5 @@
-import { expect } from "./_chai.spec"
-import { isNumber, toF, toI } from "./Number"
+import { expect } from "./_chai.spec.ts"
+import { isNumber, toF, toI } from "./Number.ts"
 
 describe("Number", () => {
   const examples = [

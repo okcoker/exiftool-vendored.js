@@ -1,5 +1,5 @@
-import { isSidecarExt } from "./Sidecars"
-import { expect } from "./_chai.spec"
+import { isSidecarExt } from "./Sidecars.ts"
+import { expect } from "./_chai.spec.ts"
 
 describe("Sidecars", () => {
   describe("isSidecarExt", () => {

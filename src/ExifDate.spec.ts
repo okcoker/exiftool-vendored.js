@@ -1,5 +1,5 @@
-import { expect } from "./_chai.spec"
-import { ExifDate } from "./ExifDate"
+import { expect } from "./_chai.spec.ts"
+import { ExifDate } from "./ExifDate.ts"
 
 describe("ExifDate", () => {
   for (const { text, iso } of [

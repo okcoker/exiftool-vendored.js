@@ -1,5 +1,5 @@
-import { expect } from "./_chai.spec"
-import { retryOnReject } from "./AsyncRetry"
+import { expect } from "./_chai.spec.ts"
+import { retryOnReject } from "./AsyncRetry.ts"
 
 describe("AsyncRetry", () => {
   it("returns simple passing thunk", async () => {

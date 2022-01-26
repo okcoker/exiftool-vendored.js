@@ -1,10 +1,11 @@
 import assert from "assert"
 import crypto from "crypto"
-import path from "path"
-import { BinaryToBufferTask } from "./BinaryToBufferTask"
-import { ExifTool } from "./ExifTool"
-import { expect, sha1buffer } from "./_chai.spec"
+import { path } from "./deps.ts"
+import { BinaryToBufferTask } from "./BinaryToBufferTask.ts"
+import { ExifTool } from "./ExifTool.ts"
+import { expect, sha1buffer } from "./_chai.spec.ts"
 
+const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
 const testDir = path.join(__dirname, "..", "test")
 describe("BinaryToBufferTask", () => {
   const exiftool = new ExifTool({ maxProcs: 1 })

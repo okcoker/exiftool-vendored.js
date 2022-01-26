@@ -1,6 +1,6 @@
 import { DateTime } from "luxon"
-import { first, map, Maybe } from "./Maybe"
-import { blank, pad2, pad3, toS } from "./String"
+import { first, map, Maybe } from "./Maybe.ts"
+import { blank, pad2, pad3, toS } from "./String.ts"
 
 /**
  * Encodes an ExifTime (which may not have a timezone offset)

@@ -1,12 +1,12 @@
 import { DateTime, ToISOTimeOptions, Zone } from "luxon"
-import { dateTimeToExif } from "./DateTime"
-import { denull, first, firstDefinedThunk, map, Maybe } from "./Maybe"
-import { blank, notBlank, toS } from "./String"
+import { dateTimeToExif } from "./DateTime.ts"
+import { denull, first, firstDefinedThunk, map, Maybe } from "./Maybe.ts"
+import { blank, notBlank, toS } from "./String.ts"
 import {
   offsetMinutesToZoneName,
   UnsetZone,
   UnsetZoneOffsetMinutes,
-} from "./Timezones"
+} from "./Timezones.ts"
 
 /**
  * Encodes an ExifDateTime with an optional tz offset in minutes.

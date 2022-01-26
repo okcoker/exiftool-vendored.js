@@ -1,4 +1,4 @@
-import { keys } from "./Object"
+import { keys } from "./Object.ts"
 
 export type Struct = {
   [k: string]: number | string | Struct

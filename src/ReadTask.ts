@@ -1,17 +1,17 @@
 import { logger } from "batch-cluster"
-import * as _path from "path"
-import { ExifDate } from "./ExifDate"
-import { ExifDateTime } from "./ExifDateTime"
-import { ExifTime } from "./ExifTime"
-import { ExifToolTask } from "./ExifToolTask"
-import { firstDefinedThunk, map } from "./Maybe"
-import { toF } from "./Number"
-import { blank, isString, toS } from "./String"
-import { Tags } from "./Tags"
+import { path as _path } from "./deps.ts"
+import { ExifDate } from "./ExifDate.ts"
+import { ExifDateTime } from "./ExifDateTime.ts"
+import { ExifTime } from "./ExifTime.ts"
+import { ExifToolTask } from "./ExifToolTask.ts"
+import { firstDefinedThunk, map } from "./Maybe.ts"
+import { toF } from "./Number.ts"
+import { blank, isString, toS } from "./String.ts"
+import { Tags } from "./Tags.ts"
 import {
   extractTzOffsetFromTags,
   extractTzOffsetFromUTCOffset,
-} from "./Timezones"
+} from "./Timezones.ts"
 const tzlookup = require("tz-lookup")
 
 /**
