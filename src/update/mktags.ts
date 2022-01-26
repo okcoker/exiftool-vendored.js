@@ -1,6 +1,5 @@
-import fs from "fs"
 import globule from "globule"
-import { path, ProgressBar, BatchCluster } from "../deps.ts"
+import { path, ProgressBar, BatchCluster, fs } from "../deps.ts"
 import { compact, filterInPlace, times, uniq } from "../Array.ts"
 import { ExifTool } from "../ExifTool.ts"
 import { map, Maybe } from "../Maybe.ts"

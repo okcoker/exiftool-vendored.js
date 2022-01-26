@@ -1,5 +1,4 @@
-import * as _fs from "fs"
-import { path as _path, BatchCluster as bc, Buffer } from "./deps.ts"
+import { path as _path, BatchCluster as bc, Buffer, fs as _fs } from "./deps.ts"
 import { retryOnReject } from "./AsyncRetry.ts"
 import { BinaryExtractionTask } from "./BinaryExtractionTask.ts"
 import { BinaryToBufferTask } from "./BinaryToBufferTask.ts"
