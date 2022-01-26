@@ -32,7 +32,7 @@ export type { Tags }
 const isWin32 = lazy(() => Deno.build.os === "windows")
 
 function findExiftool(): string {
-  const path: string = require(`exiftool-vendored.${isWin32() ? "exe" : "pl"}`)
+  const path: string = _path.resolve(`exiftool-vendored.${isWin32() ? "exe" : "pl"}`)
   // This s/app.asar/app.asar.unpacked/ path switch adds support for Electron
   // apps that are ASAR-packed.
 
@@ -177,7 +177,7 @@ export interface ExifToolOptions
   /**
    * Environment variables passed to ExifTool (besides `EXIFTOOL_HOME`)
    */
-  exiftoolEnv: typeof Deno.env.toObject
+  exiftoolEnv: ReturnType<typeof Deno.env.toObject>
 
   /**
    * Tag names (which can have '*' glob matchers) which you want numeric values,
@@ -246,7 +246,7 @@ export const DefaultExifToolOptions: Omit<
  */
 export class ExifTool {
   readonly options: ExifToolOptions
-  private readonly batchCluster: typeof bc.BatchCluster
+  private readonly batchCluster: bc.BatchCluster
 
   constructor(options: Partial<ExifToolOptions> = {}) {
     if (options != null && typeof options !== "object") {
@@ -299,7 +299,7 @@ export class ExifTool {
    * Register life cycle event listeners. Delegates to BatchProcess.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly on: typeof bc.BatchCluster["on"] = (event: any, listener: any) =>
+  readonly on: bc.BatchCluster["on"] = (event: any, listener: any) =>
     this.batchCluster.on(event, listener)
 
   /**

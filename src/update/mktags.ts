@@ -1,5 +1,4 @@
-import globule from "globule"
-import { path, ProgressBar, BatchCluster, fs } from "../deps.ts"
+import { path, ProgressBar, BatchCluster, fs, globule } from "../deps.ts"
 import { compact, filterInPlace, times, uniq } from "../Array.ts"
 import { ExifTool } from "../ExifTool.ts"
 import { map, Maybe } from "../Maybe.ts"
@@ -8,7 +7,7 @@ import { nullish } from "../ReadTask.ts"
 import { blank, isString, leftPad } from "../String.ts"
 
 
-const { Log, logger, setLogger } = BatchCluster.BatchCluster;
+const { Log, logger, setLogger } = BatchCluster;
 const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
 
 // ☠☠ THIS IS GRISLY, NASTY CODE. SCROLL DOWN AT YOUR OWN PERIL ☠☠

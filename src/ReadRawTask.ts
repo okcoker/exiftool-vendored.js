@@ -2,7 +2,7 @@ import { path as _path, BatchCluster } from "./deps.ts"
 import { ExifToolTask } from "./ExifToolTask.ts"
 import { Tags } from "./Tags.ts"
 
-const { logger } = BatchCluster.BatchCluster;
+const { logger } = BatchCluster;
 export class ReadRawTask extends ExifToolTask<Tags> {
   static for(filename: string, exiftoolArgs: string[] = []): ReadRawTask {
     const args = [...exiftoolArgs]

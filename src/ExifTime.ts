@@ -18,7 +18,7 @@ export class ExifTime {
     )
   }
 
-  static fromDateTime(dt: typeof DateTime): Maybe<ExifTime> {
+  static fromDateTime(dt: luxon.DateTime): Maybe<ExifTime> {
     return dt == null || !dt.isValid
       ? undefined
       : new ExifTime(dt.hour, dt.minute, dt.second, dt.millisecond)

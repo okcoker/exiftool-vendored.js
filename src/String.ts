@@ -69,7 +69,7 @@ export function stripSuffix(s: string, suffix: string): string {
 
 export function htmlEncode(s: string): string {
   // `he` doesn't encode whitespaces (like newlines), but we need that:
-  return encode(s, { decimal: true }).replace(/\s/g, (m) =>
+  return encode(s, { decimal: true }).replace(/\s/g, (m: string[]) =>
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     m[0] === " " ? " " : `&#${m[0]!.charCodeAt(0)};`
   )

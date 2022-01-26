@@ -43,7 +43,7 @@ export class ExifDate {
     ])
   }
 
-  static fromDateTime(dt: DateTime, rawValue?: string): Maybe<ExifDate> {
+  static fromDateTime(dt: luxon.DateTime, rawValue?: string): Maybe<ExifDate> {
     return validDateTime(dt)
       ? new ExifDate(dt.year, dt.month, dt.day, rawValue)
       : undefined

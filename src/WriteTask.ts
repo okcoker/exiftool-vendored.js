@@ -36,10 +36,10 @@ function enc(o: any): Maybe<string> {
   } else if (isDateOrTime(o)) {
     return toExifString(o)
   } else if (Array.isArray(o)) {
-    const primitiveArray = o.every((ea) => isString(ea) || isNumber(ea))
+    const primitiveArray = (o as any[]).every((ea) => isString(ea) || isNumber(ea))
     return primitiveArray
-      ? `${o.map(enc).join(sep)}`
-      : `[${o.map(enc).join(",")}]`
+      ? `${(o as any[]).map(enc).join(sep)}`
+      : `[${(o as any[]).map(enc).join(",")}]`
   } else if (isStruct(o)) {
     return `{${keys(o)
       .map((k) => enc(k) + " = " + enc(o[k]))
