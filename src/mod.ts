@@ -1,7 +1,6 @@
-import * as bc from "batch-cluster"
 import * as _cp from "child_process"
 import * as _fs from "fs"
-import { path as _path } from "./deps.ts"
+import { path as _path, BatchCluster as bc } from "./deps.ts"
 import { retryOnReject } from "./AsyncRetry.ts"
 import { BinaryExtractionTask } from "./BinaryExtractionTask.ts"
 import { BinaryToBufferTask } from "./BinaryToBufferTask.ts"

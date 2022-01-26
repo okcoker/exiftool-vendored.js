@@ -1,4 +1,4 @@
-import * as bc from "batch-cluster"
+import { BatchCluster as bc } from "./deps.ts"
 import { notBlank, stripPrefix } from "./String.ts"
 
 export abstract class ExifToolTask<T> extends bc.Task<T> {

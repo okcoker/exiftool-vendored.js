@@ -1,10 +1,10 @@
-import { Deferred, Log, setLogger } from "batch-cluster"
 import crypto from "crypto"
 import { copyFile, createReadStream, mkdirp } from "fs-extra"
-import { path, getOSTempDir } from "./deps.ts"
+import { path, getOSTempDir, BatchCluster } from "./deps.ts"
 
 const chai = require("chai")
 const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
+const { Deferred, Log, setLogger } = BatchCluster.BatchCluster;
 
 chai.use(require("chai-as-promised"))
 chai.use(require("chai-subset"))

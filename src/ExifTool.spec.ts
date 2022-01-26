@@ -1,5 +1,4 @@
-import { BatchCluster } from "batch-cluster"
-import { path as _path } from "./deps.ts"
+import { path as _path, BatchCluster as _bc } from "./deps.ts"
 import { times } from "./Array.ts"
 import { ExifDate } from "./ExifDate.ts"
 import { ExifDateTime } from "./ExifDateTime.ts"
@@ -11,6 +10,7 @@ import { leftPad } from "./String.ts"
 import { Tags } from "./Tags.ts"
 import { expect, isWin32, testImg } from "./_chai.spec.ts"
 
+const BatchCluster = _bc.BatchCluster;
 const __dirname = _path.dirname(_path.fromFileUrl(import.meta.url));
 
 function normalize(tagNames: string[]): string[] {

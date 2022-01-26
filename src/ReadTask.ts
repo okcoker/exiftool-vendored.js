@@ -1,5 +1,4 @@
-import { logger } from "batch-cluster"
-import { path as _path } from "./deps.ts"
+import { path as _path, BatchCluster } from "./deps.ts"
 import { ExifDate } from "./ExifDate.ts"
 import { ExifDateTime } from "./ExifDateTime.ts"
 import { ExifTime } from "./ExifTime.ts"
@@ -12,6 +11,8 @@ import {
   extractTzOffsetFromTags,
   extractTzOffsetFromUTCOffset,
 } from "./Timezones.ts"
+
+const { logger } = BatchCluster.BatchCluster;
 const tzlookup = require("tz-lookup")
 
 /**

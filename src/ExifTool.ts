@@ -1,7 +1,6 @@
-import * as bc from "batch-cluster"
 import * as _cp from "child_process"
 import * as _fs from "fs"
-import { path as _path } from "./deps.ts"
+import { path as _path, BatchCluster as bc } from "./deps.ts"
 import { retryOnReject } from "./AsyncRetry.ts"
 import { BinaryExtractionTask } from "./BinaryExtractionTask.ts"
 import { BinaryToBufferTask } from "./BinaryToBufferTask.ts"
@@ -249,7 +248,7 @@ export const DefaultExifToolOptions: Omit<
  */
 export class ExifTool {
   readonly options: ExifToolOptions
-  private readonly batchCluster: bc.BatchCluster
+  private readonly batchCluster: typeof bc.BatchCluster
 
   constructor(options: Partial<ExifToolOptions> = {}) {
     if (options != null && typeof options !== "object") {
@@ -293,7 +292,7 @@ export class ExifTool {
    * Register life cycle event listeners. Delegates to BatchProcess.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly on: bc.BatchCluster["on"] = (event: any, listener: any) =>
+  readonly on: typeof bc.BatchCluster["on"] = (event: any, listener: any) =>
     this.batchCluster.on(event, listener)
 
   /**
