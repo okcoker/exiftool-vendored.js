@@ -1,6 +1,6 @@
 export * as path from "https://deno.land/std@0.122.0/path/mod.ts";
 export * as fs from "https://deno.land/std@0.122.0/node/fs.ts";
-
+export * as ProgressBar from "https://cdn.skypack.dev/progress@2.0.3";
 // https://stackoverflow.com/questions/61813646/whats-deno-equivalent-of-node-js-buffer-fromstring
 export class Buffer {
     static from(str: string, encoding = 'hex') {
@@ -12,3 +12,5 @@ export class Buffer {
         return encoder.encode(str);
     }
 }
+
+export const getOSTempDir = () => Deno.env.get('TMPDIR') || Deno.env.get('TMP') || Deno.env.get('TEMP') || '/tmp';

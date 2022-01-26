@@ -1,11 +1,12 @@
 import * as fse from "fs-extra"
-import os from "os"
-import path, { join } from "path"
-import { ExifDateTime } from "./ExifDateTime"
-import { exiftool, ExifTool } from "./ExifTool"
-import { ReadTask } from "./ReadTask"
-import { Tags } from "./Tags"
-import { expect, isWin32, testDir } from "./_chai.spec"
+import { path, getOSTempDir } from "./deps.ts"
+import { ExifDateTime } from "./ExifDateTime.ts"
+import { exiftool, ExifTool } from "./ExifTool.ts"
+import { ReadTask } from "./ReadTask.ts"
+import { Tags } from "./Tags.ts"
+import { expect, isWin32, testDir } from "./_chai.spec.ts"
+
+const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
 
 function parse(tags: any, err?: Error): Tags {
   const tt = ReadTask.for("/tmp/example.jpg", [])
@@ -58,7 +59,7 @@ describe("ReadTask", () => {
     })
 
     it("extracts problematic GPSDateTime", async () => {
-      const t = await exiftool.read(join(testDir, "nexus5x.jpg"))
+      const t = await exiftool.read(path.join(testDir, "nexus5x.jpg"))
       expect(t).to.containSubset({
         MIMEType: "image/jpeg",
         Make: "LGE",
@@ -303,8 +304,8 @@ describe("ReadTask", () => {
   describe("quotes in filenames", () => {
     const base = isWin32() ? `it's a file.jpg` : `it's a "file".jpg`
     it("reads from " + base, async () => {
-      const tmp = path.join(os.tmpdir(), base)
-      await fse.mkdirp(os.tmpdir())
+      const tmp = path.join(getOSTempDir(), base)
+      await fse.mkdirp(getOSTempDir())
       await fse.copyFile("./test/quotes.jpg", tmp)
       const t = await exiftool.read(tmp)
       expect(t.FileName).to.eql(base)

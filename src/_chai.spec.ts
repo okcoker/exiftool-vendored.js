@@ -1,10 +1,11 @@
 import { Deferred, Log, setLogger } from "batch-cluster"
 import crypto from "crypto"
 import { copyFile, createReadStream, mkdirp } from "fs-extra"
-import os from "os"
-import path from "path"
+import { path, getOSTempDir } from "./deps.ts"
 
 const chai = require("chai")
+const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
+
 chai.use(require("chai-as-promised"))
 chai.use(require("chai-subset"))
 
@@ -32,7 +33,7 @@ export const testDir = path.join(__dirname, "..", "test")
 
 export function tmpname(prefix = ""): string {
   return path.join(
-    os.tmpdir(),
+    getOSTempDir(),
     prefix + Math.floor(Math.random() * 1e9).toString(16)
   )
 }
@@ -71,5 +72,5 @@ export function sha1buffer(input: string | Buffer): string {
 }
 
 export function isWin32() {
-  return os.platform() === "win32"
+  return Deno.build.os === "windows"
 }

@@ -1,7 +1,6 @@
 import * as bc from "batch-cluster"
 import * as _cp from "child_process"
 import * as _fs from "fs"
-import * as _os from "os"
 import { path as _path } from "./deps.ts"
 import { retryOnReject } from "./AsyncRetry.ts"
 import { BinaryExtractionTask } from "./BinaryExtractionTask.ts"
@@ -33,7 +32,7 @@ export {
 } from "./Timezones.ts"
 export type { Tags }
 
-const isWin32 = lazy(() => _os.platform() === "win32")
+const isWin32 = lazy(() => Deno.build.os === "windows")
 
 function findExiftool(): string {
   const path: string = require(`exiftool-vendored.${isWin32() ? "exe" : "pl"}`)
@@ -111,7 +110,7 @@ export type WriteTags = DefinedOrNullValued<
   ShortcutTags & AdditionalWriteTags & ExpandedDateTags
 >
 
-export const DefaultMaxProcs = Math.max(1, Math.floor(_os.cpus().length / 4))
+export const DefaultMaxProcs = Math.max(1, Math.floor(navigator.hardwareConcurrency / 4))
 
 export interface ExifToolOptions
   extends bc.BatchClusterOptions,
