@@ -1,6 +1,5 @@
-import * as _cp from "child_process"
 import * as _fs from "fs"
-import { path as _path, BatchCluster as bc } from "./deps.ts"
+import { path as _path, BatchCluster as bc, Buffer } from "./deps.ts"
 import { retryOnReject } from "./AsyncRetry.ts"
 import { BinaryExtractionTask } from "./BinaryExtractionTask.ts"
 import { BinaryToBufferTask } from "./BinaryToBufferTask.ts"
@@ -266,16 +265,25 @@ export class ExifTool {
     if (notBlank(Deno.env.get('EXIFTOOL_HOME')) && blank(env.EXIFTOOL_HOME)) {
       env.EXIFTOOL_HOME = Deno.env.get('EXIFTOOL_HOME')
     }
-    const spawnOpts: _cp.SpawnOptions = {
-      stdio: "pipe",
-      shell: ignoreShebang, // we need to spawn a shell if we ignore the shebang.
-      detached: false, // < no orphaned exiftool procs, please
+    const spawnOpts: Deno.RunOptions = {
+      cmd: [],
+      stdin: 'piped',
+      stdout: 'piped',
+      stderr: 'piped',
+      // shell: ignoreShebang, // we need to spawn a shell if we ignore the shebang.
+      // detached: false, // < no orphaned exiftool procs, please
       env,
     }
     const processFactory = () =>
       ignoreShebang
-        ? _cp.spawn("perl", [o.exiftoolPath, ...o.exiftoolArgs], spawnOpts)
-        : _cp.spawn(o.exiftoolPath, o.exiftoolArgs, spawnOpts)
+        ? Deno.run({
+          ...spawnOpts,
+          cmd: ["perl", o.exiftoolPath, ...o.exiftoolArgs],
+        })
+        : Deno.run({
+          ...spawnOpts,
+          cmd: [o.exiftoolPath, ...o.exiftoolArgs]
+        })
     this.options = {
       ...o,
       ignoreShebang,
