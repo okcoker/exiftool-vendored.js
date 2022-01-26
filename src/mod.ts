@@ -181,7 +181,7 @@ export interface ExifToolOptions
   /**
    * Environment variables passed to ExifTool (besides `EXIFTOOL_HOME`)
    */
-  exiftoolEnv: typeof Deno.env.toObject
+  exiftoolEnv: NodeJS.ProcessEnv
 
   /**
    * Tag names (which can have '*' glob matchers) which you want numeric values,

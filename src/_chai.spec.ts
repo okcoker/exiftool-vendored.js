@@ -3,7 +3,6 @@ import crypto from "crypto"
 import { copyFile, createReadStream, mkdirp } from "fs-extra"
 import os from "os"
 import path from "path"
-import process from "process"
 
 const chai = require("chai")
 chai.use(require("chai-as-promised"))
@@ -21,7 +20,7 @@ setLogger(
           warn: console.warn,
           error: console.error,
         },
-        (process.env.LOG as any) ?? "error"
+        Deno.env.get('LOG') ?? "error"
       )
     )
   )

@@ -1,11 +1,8 @@
-require("source-map-support").install()
-
 import { Log, logger, setLogger } from "batch-cluster"
 import fs from "fs"
 import globule from "globule"
 import os from "os"
 import { path, ProgressBar } from "../deps.ts"
-import process from "process"
 import { compact, filterInPlace, times, uniq } from "../Array.ts"
 import { ExifTool } from "../ExifTool.ts"
 import { map, Maybe } from "../Maybe.ts"
@@ -202,34 +199,24 @@ setLogger(
           warn: console.warn,
           error: console.error,
         },
-        (process.env.LOG as any) ?? "info"
+        Deno.env.get('LOG') ?? "info"
       )
     )
   )
 )
 
-process.on("uncaughtException", (error: any) => {
-  console.error("Ack, caught uncaughtException: " + error.stack)
-})
-
-process.on("unhandledRejection", (reason: any) => {
-  console.error(
-    "Ack, caught unhandledRejection: " + (reason.stack ?? reason.toString)
-  )
-})
-
 function usage() {
   console.log("Usage: `yarn run mktags IMG_DIR`")
   console.log("\nRebuilds src/Tags.ts from tags found in IMG_DIR.")
   // eslint-disable-next-line no-process-exit
-  process.exit(1)
+  Deno.exit(1)
 }
 
 function cmp(a: any, b: any): number {
   return a > b ? 1 : a < b ? -1 : 0
 }
 
-const roots = process.argv.slice(2)
+const roots = Deno.args
 if (roots.length === 0)
   throw new Error("USAGE: mktags <path to image directory>")
 
@@ -634,12 +621,6 @@ async function readAndAddToTagMap(file: string) {
 }
 
 const start = Date.now()
-
-process.on("unhandledRejection", (reason: any) => {
-  console.error(
-    "Ack, caught unhandled rejection: " + (reason.stack ?? reason.toString)
-  )
-})
 
 Promise.all(files.map((file) => readAndAddToTagMap(file)))
   .then(async () => {
