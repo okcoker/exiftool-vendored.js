@@ -1,6 +1,8 @@
-import { DateTime } from "luxon"
+import { luxon } from "./deps.ts"
 import { first, map, Maybe } from "./Maybe.ts"
 import { blank, pad2, pad3, toS } from "./String.ts"
+
+const { DateTime } = luxon;
 
 /**
  * Encodes an ExifTime (which may not have a timezone offset)
@@ -16,7 +18,7 @@ export class ExifTime {
     )
   }
 
-  static fromDateTime(dt: DateTime): Maybe<ExifTime> {
+  static fromDateTime(dt: typeof DateTime): Maybe<ExifTime> {
     return dt == null || !dt.isValid
       ? undefined
       : new ExifTime(dt.hour, dt.minute, dt.second, dt.millisecond)

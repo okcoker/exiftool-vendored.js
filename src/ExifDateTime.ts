@@ -1,4 +1,4 @@
-import { DateTime, ToISOTimeOptions, Zone } from "luxon"
+import { luxon } from "./deps.ts"
 import { dateTimeToExif } from "./DateTime.ts"
 import { denull, first, firstDefinedThunk, map, Maybe } from "./Maybe.ts"
 import { blank, notBlank, toS } from "./String.ts"
@@ -8,6 +8,7 @@ import {
   UnsetZoneOffsetMinutes,
 } from "./Timezones.ts"
 
+const { DateTime, ToISOTimeOptions, Zone } = luxon;
 /**
  * Encodes an ExifDateTime with an optional tz offset in minutes.
  */
@@ -50,7 +51,7 @@ export class ExifDateTime {
 
   private static fromPatterns(
     text: string,
-    fmts: { fmt: string; zone?: string | Zone | undefined }[]
+    fmts: { fmt: string; zone?: string | typeof Zone | undefined }[]
   ) {
     const s = toS(text).trim()
     const inputs = [s]
@@ -132,7 +133,7 @@ export class ExifDateTime {
     ])
   }
 
-  static fromDateTime(dt: DateTime, rawValue?: string): Maybe<ExifDateTime> {
+  static fromDateTime(dt: typeof DateTime, rawValue?: string): Maybe<ExifDateTime> {
     if (
       dt == null ||
       !dt.isValid ||
@@ -202,7 +203,7 @@ export class ExifDateTime {
     return this.toDateTime().toJSDate()
   }
 
-  toISOString(options: ToISOTimeOptions = {}): Maybe<string> {
+  toISOString(options: typeof ToISOTimeOptions = {}): Maybe<string> {
     return denull(
       this.toDateTime().toISO({
         suppressMilliseconds:

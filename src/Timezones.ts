@@ -1,4 +1,4 @@
-import { FixedOffsetZone, Info } from "luxon"
+import { luxon } from "./deps.ts"
 import { compact } from "./Array.ts"
 import { MinuteMs } from "./DateTime.ts"
 import { ExifDateTime } from "./ExifDateTime.ts"
@@ -6,6 +6,7 @@ import { first, firstDefinedThunk, map, Maybe } from "./Maybe.ts"
 import { isNumber } from "./Number.ts"
 import { blank, isString, pad2 } from "./String.ts"
 
+const { FixedOffsetZone, Info } = luxon;
 // Pacific/Kiritimati is +14:00 TIL
 // https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 export const MaxTzOffsetHours = 14

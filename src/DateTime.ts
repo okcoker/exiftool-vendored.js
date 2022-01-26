@@ -1,9 +1,10 @@
-import { DateTime } from "luxon"
-
+import { luxon } from "./deps.ts"
 import { ExifDate } from "./ExifDate.ts"
 import { ExifDateTime } from "./ExifDateTime.ts"
 import { ExifTime } from "./ExifTime.ts"
 import { Maybe } from "./Maybe.ts"
+
+const { DateTime } = luxon;
 
 export function validDateTime(dt: DateTime): boolean {
   return dt != null && dt.isValid

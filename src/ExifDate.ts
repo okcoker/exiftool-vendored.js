@@ -1,8 +1,10 @@
-import { DateTime } from "luxon"
+import { luxon } from "./deps.ts"
 
 import { validDateTime } from "./DateTime.ts"
 import { first, firstDefinedThunk, map, Maybe } from "./Maybe.ts"
 import { blank, pad2, toS } from "./String.ts"
+
+const { DateTime } = luxon;
 
 /**
  * Encodes an ExifDate
