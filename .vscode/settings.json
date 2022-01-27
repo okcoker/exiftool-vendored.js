@@ -1,27 +1,4 @@
 {
-  "typescript.tsdk": "./node_modules/typescript/lib",
-  "cSpell.words": [
-    "exiftool's"
-  ],
-  "cSpell.ignoreWords": [
-    "automagick",
-    "betz",
-    "dry'ed",
-    "fmts",
-    "fnumber",
-    "gpsdt",
-    "mktags",
-    "mocharc",
-    "nojekyll",
-    "nullish",
-    "premktags",
-    "preu",
-    "randler",
-    "sscd",
-    "structs",
-    "tmpname",
-    "tzoffset"
-  ],
   "deno.enable": true,
   "deno.lint": true,
   "deno.unstable": true
