@@ -1,6 +1,6 @@
-import { luxon } from "./deps.ts"
-import { first, map, Maybe } from "./Maybe.ts"
-import { blank, pad2, pad3, toS } from "./String.ts"
+import { luxon } from './deps.ts';
+import { first, map, Maybe } from './Maybe.ts';
+import { blank, pad2, pad3, toS } from './String.ts';
 
 const { DateTime } = luxon;
 
@@ -8,62 +8,71 @@ const { DateTime } = luxon;
  * Encodes an ExifTime (which may not have a timezone offset)
  */
 export class ExifTime {
-  static fromEXIF(text: string): Maybe<ExifTime> {
-    if (blank(text)) return
-    text = toS(text).trim()
-    return first(
-      ["HH:mm:ss.uZZ", "HH:mm:ssZZ", "HH:mm:ss.u", "HH:mm:ss"],
-      (fmt) =>
-        map(DateTime.fromFormat(text, fmt), (dt) => this.fromDateTime(dt))
-    )
-  }
+	static fromEXIF(text: string): Maybe<ExifTime> {
+		if (blank(text)) return;
+		text = toS(text).trim();
+		return first(
+			['HH:mm:ss.uZZ', 'HH:mm:ssZZ', 'HH:mm:ss.u', 'HH:mm:ss'],
+			(fmt) =>
+				map(
+					DateTime.fromFormat(text, fmt),
+					(dt) => this.fromDateTime(dt),
+				),
+		);
+	}
 
-  static fromDateTime(dt: luxon.DateTime): Maybe<ExifTime> {
-    return dt == null || !dt.isValid
-      ? undefined
-      : new ExifTime(dt.hour, dt.minute, dt.second, dt.millisecond)
-  }
+	static fromDateTime(dt: luxon.DateTime): Maybe<ExifTime> {
+		return dt == null || !dt.isValid
+			? undefined
+			: new ExifTime(dt.hour, dt.minute, dt.second, dt.millisecond);
+	}
 
-  constructor(
-    readonly hour: number,
-    readonly minute: number,
-    readonly second: number,
-    readonly millisecond?: number
-  ) {}
+	constructor(
+		readonly hour: number,
+		readonly minute: number,
+		readonly second: number,
+		readonly millisecond?: number,
+	) {}
 
-  get millis() {
-    return this.millisecond
-  }
+	get millis() {
+		return this.millisecond;
+	}
 
-  private subsec() {
-    return this.millisecond == null || this.millisecond === 0
-      ? ""
-      : "." + pad3(this.millisecond)
-  }
+	private subsec() {
+		return this.millisecond == null || this.millisecond === 0
+			? ''
+			: '.' + pad3(this.millisecond);
+	}
 
-  toString() {
-    return pad2(this.hour, this.minute, this.second).join(":") + this.subsec()
-  }
+	toString() {
+		return pad2(this.hour, this.minute, this.second).join(':') +
+			this.subsec();
+	}
 
-  toISOString() {
-    return this.toString()
-  }
+	toISOString() {
+		return this.toString();
+	}
 
-  toExifString() {
-    return this.toString()
-  }
+	toExifString() {
+		return this.toString();
+	}
 
-  toJSON() {
-    return {
-      _ctor: "ExifTime",
-      hour: this.hour,
-      minute: this.minute,
-      second: this.second,
-      millisecond: this.millisecond,
-    }
-  }
+	toJSON() {
+		return {
+			_ctor: 'ExifTime',
+			hour: this.hour,
+			minute: this.minute,
+			second: this.second,
+			millisecond: this.millisecond,
+		};
+	}
 
-  static fromJSON(json: ReturnType<ExifTime["toJSON"]>): ExifTime {
-    return new ExifTime(json.hour, json.minute, json.second, json.millisecond)
-  }
+	static fromJSON(json: ReturnType<ExifTime['toJSON']>): ExifTime {
+		return new ExifTime(
+			json.hour,
+			json.minute,
+			json.second,
+			json.millisecond,
+		);
+	}
 }

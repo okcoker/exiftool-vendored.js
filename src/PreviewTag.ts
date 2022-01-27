@@ -1,5 +1,5 @@
 export type PreviewTag =
-  | "ThumbnailImage"
-  | "PreviewImage"
-  | "JpgFromRaw"
-  | string
+	| 'ThumbnailImage'
+	| 'PreviewImage'
+	| 'JpgFromRaw'
+	| string;
