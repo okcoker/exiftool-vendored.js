@@ -1,4 +1,4 @@
-import { expect } from "./_chai.spec.ts"
+import { expect, describe, it } from "./_chai.spec.ts"
 import { pad2, pad3 } from "./String.ts"
 
 describe("String", () => {

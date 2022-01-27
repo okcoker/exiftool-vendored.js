@@ -7,12 +7,13 @@ import { isSidecarExt } from "./Sidecars.ts"
 import { stripSuffix } from "./String.ts"
 import { Struct } from "./Struct.ts"
 import { Tags } from "./Tags.ts"
-import { expect, testFile, testImg } from "./_chai.spec.ts"
+import { expect, testFile, testImg, describe, it, afterAll as after } from "./_chai.spec.ts"
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 describe("WriteTask", function () {
-  this.slow(1) // always show timings
+  // @todo check on this later
+  // this.slow(1) // always show timings
   for (const opts of [
     { maxProcs: 1, maxRetries: 0 },
     { maxProcs: 3, maxRetries: 3 },

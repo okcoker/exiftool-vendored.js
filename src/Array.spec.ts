@@ -1,4 +1,4 @@
-import { expect } from "./_chai.spec.ts"
+import { expect, describe, it } from "./_chai.spec.ts"
 import { compact, filterInPlace, shallowArrayEql, times, uniq } from "./Array.ts"
 
 describe("Array", () => {

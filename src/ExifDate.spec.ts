@@ -1,4 +1,4 @@
-import { expect } from "./_chai.spec.ts"
+import { expect, describe, it } from "./_chai.spec.ts"
 import { ExifDate } from "./ExifDate.ts"
 
 describe("ExifDate", () => {

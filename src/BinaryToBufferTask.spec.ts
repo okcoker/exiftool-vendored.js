@@ -1,9 +1,7 @@
-import assert from "assert"
-import crypto from "crypto"
-import { path } from "./deps.ts"
+import { path, assert, crypto, encode } from "./deps.ts"
 import { BinaryToBufferTask } from "./BinaryToBufferTask.ts"
 import { ExifTool } from "./ExifTool.ts"
-import { expect, sha1buffer } from "./_chai.spec.ts"
+import { expect, sha1buffer, describe, it, afterAll as after } from "./_chai.spec.ts"
 
 const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
 const testDir = path.join(__dirname, "..", "test")
@@ -28,13 +26,14 @@ describe("BinaryToBufferTask", () => {
       expect(sut.parse("").toString()).to.match(/Unexpected end of JSON input/i)
     })
     it("returns any provided errors", () => {
-      const err = new Error(crypto.randomBytes(3).toString("hex"))
+      const err = new Error(new TextDecoder().decode(encode(crypto.getRandomValues(new Uint8Array(3)))))
       expect(sut.parse("", err).toString()).to.include(err.message)
     })
   })
 
   it("extracts expected thumb", async function () {
-    this.slow(500)
+    // @todo check on this later
+    // this.slow(500)
     const src = path.join(testDir, "with_thumb.jpg")
     const buf = await exiftool.extractBinaryTagToBuffer("ThumbnailImage", src)
     // exiftool with_thumb.jpg -b -ThumbnailImage | sha1sum
@@ -42,7 +41,8 @@ describe("BinaryToBufferTask", () => {
   })
 
   it("throws for missing src", async function () {
-    this.slow(500)
+    // @todo check on this later
+    // this.slow(500)
     const src = path.join(testDir, "nonexistant-file.jpg")
     try {
       await exiftool.extractBinaryTagToBuffer("JpgFromRaw", src)
@@ -53,7 +53,8 @@ describe("BinaryToBufferTask", () => {
   })
 
   it("throws for missing thumb", async function () {
-    this.slow(500)
+    // @todo check on this later
+    // this.slow(500)
     const src = path.join(testDir, "with_thumb.jpg")
     try {
       await exiftool.extractBinaryTagToBuffer("JpgFromRaw", src)

@@ -29,10 +29,11 @@ export {
 } from "./Timezones.ts"
 export type { Tags }
 
+const __dirname = _path.join(_path.fromFileUrl(import.meta.url));
 const isWin32 = lazy(() => Deno.build.os === "windows")
 
 function findExiftool(): string {
-  const path: string = _path.resolve(`exiftool-vendored.${isWin32() ? "exe" : "pl"}`)
+  const path: string = _path.join(__dirname, '../../bin/exiftool')
   // This s/app.asar/app.asar.unpacked/ path switch adds support for Electron
   // apps that are ASAR-packed.
 

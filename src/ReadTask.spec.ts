@@ -1,10 +1,9 @@
-import * as fse from "fs-extra"
-import { path, getOSTempDir } from "./deps.ts"
+import { path, getOSTempDir, mkdirp, copyFile } from "./deps.ts"
 import { ExifDateTime } from "./ExifDateTime.ts"
 import { exiftool, ExifTool } from "./ExifTool.ts"
 import { ReadTask } from "./ReadTask.ts"
 import { Tags } from "./Tags.ts"
-import { expect, isWin32, testDir } from "./_chai.spec.ts"
+import { expect, isWin32, testDir, describe, it, afterAll as after, beforeAll as before } from "./_chai.spec.ts"
 
 const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
 
@@ -305,8 +304,8 @@ describe("ReadTask", () => {
     const base = isWin32() ? `it's a file.jpg` : `it's a "file".jpg`
     it("reads from " + base, async () => {
       const tmp = path.join(getOSTempDir(), base)
-      await fse.mkdirp(getOSTempDir())
-      await fse.copyFile("./test/quotes.jpg", tmp)
+      await mkdirp(getOSTempDir())
+      await copyFile("./test/quotes.jpg", tmp)
       const t = await exiftool.read(tmp)
       expect(t.FileName).to.eql(base)
       expect(t.MIMEType).to.eql("image/jpeg")

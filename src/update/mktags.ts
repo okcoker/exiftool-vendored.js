@@ -1,4 +1,4 @@
-import { path, ProgressBar, BatchCluster, fs, globule } from "../deps.ts"
+import { path, ProgressBar, BatchCluster, globSync, fs } from "../deps.ts"
 import { compact, filterInPlace, times, uniq } from "../Array.ts"
 import { ExifTool } from "../ExifTool.ts"
 import { map, Maybe } from "../Maybe.ts"
@@ -199,7 +199,7 @@ setLogger(
           warn: console.warn,
           error: console.error,
         },
-        Deno.env.get('LOG') ?? "info"
+        Deno.env.get('LOG') as keyof BatchCluster.Logger ?? "info"
       )
     )
   )
@@ -225,8 +225,7 @@ const pattern = "**/*.+(3fr|avi|jpg|mov|mp4|cr2|cr3|nef|orf|raf|arw|rw2)"
 const files = roots
   .map((root) => {
     logger().info("Scanning " + pattern + "...")
-    return globule
-      .find(pattern, { srcBase: root, nocase: true, nodir: true })
+    return globSync(root, pattern)
       .map((ea) => path.resolve(root + "/" + ea))
   })
   .reduce((prev, curr) => prev.concat(curr))

@@ -1,5 +1,5 @@
 import { ExifDateTime } from "./ExifDateTime.ts"
-import { expect } from "./_chai.spec.ts"
+import { expect, describe, it } from "./_chai.spec.ts"
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 describe("ExifDateTime", () => {

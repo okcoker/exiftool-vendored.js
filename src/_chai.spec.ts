@@ -1,13 +1,23 @@
-import crypto from "crypto"
-import { copyFile, createReadStream, mkdirp } from "fs-extra"
-import { path, getOSTempDir, BatchCluster } from "./deps.ts"
 
-const chai = require("chai")
+import { expect, use } from 'https://cdn.skypack.dev/chai@4.3.4?dts';
+import { default as chaiSubset } from 'https://cdn.skypack.dev/chai-subset@1.6.0?dts';
+import { default as chaiAsPromised } from 'https://cdn.skypack.dev/chai-as-promised@7.1.1?dts';
+import {
+	afterAll,
+	afterEach,
+	beforeAll,
+	beforeEach,
+	describe,
+	it,
+	test
+} from 'https://deno.land/x/test_suite@0.9.5/mod.ts';
+import { path, getOSTempDir, BatchCluster, Buffer, copyFile, mkdirp, encode, crypto } from "./deps.ts"
+
 const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
-const { Deferred, Log, setLogger } = BatchCluster.BatchCluster;
+const { Deferred, Log, setLogger } = BatchCluster;
 
-chai.use(require("chai-as-promised"))
-chai.use(require("chai-subset"))
+use(chaiAsPromised)
+use(chaiSubset)
 
 // Tests should be quiet unless LOG is set
 setLogger(
@@ -21,13 +31,11 @@ setLogger(
           warn: console.warn,
           error: console.error,
         },
-        Deno.env.get('LOG') ?? "error"
+        Deno.env.get('LOG') as any ?? "error"
       )
     )
   )
 )
-
-export { expect } from "chai"
 
 export const testDir = path.join(__dirname, "..", "test")
 
@@ -57,20 +65,39 @@ export async function testFile(name: string): Promise<string> {
   return path.join(dir, name)
 }
 
-export function sha1(path: string): Promise<string> {
-  const d = new Deferred<string>()
-  const readStream = createReadStream(path, { autoClose: true })
-  const sha = crypto.createHash("sha1")
-  readStream.on("data", (ea) => sha.update(ea))
-  readStream.on("error", (err) => d.reject(err))
-  readStream.on("end", () => d.resolve(sha.digest().toString("hex")))
-  return d.promise
+export async function sha1(path: string): Promise<string> {
+  const file = await Deno.readTextFile(path)
+  const digest = await crypto.subtle.digest(
+    "BLAKE3",
+    new TextEncoder().encode(file),
+  )
+  const arr = new Uint8Array(digest);
+
+  return new TextDecoder().decode(encode(arr));
 }
 
-export function sha1buffer(input: string | Buffer): string {
-  return crypto.createHash("sha1").update(input).digest().toString("hex")
+export async function sha1buffer(input: string | Buffer): Promise<string> {
+  const digest = await crypto.subtle.digest(
+    "BLAKE3",
+    typeof input === 'string' ? new TextEncoder().encode(input) : input,
+  )
+  const arr = new Uint8Array(digest);
+
+  return new TextDecoder().decode(encode(arr));
+  // return crypto.createHash("sha1").update(input).digest().toString("hex")
 }
 
 export function isWin32() {
   return Deno.build.os === "windows"
 }
+
+export {
+	afterAll,
+	afterEach,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	test
+};

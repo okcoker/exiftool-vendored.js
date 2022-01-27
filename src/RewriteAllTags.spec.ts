@@ -1,7 +1,7 @@
 import { path } from "./deps.ts"
 import { ExifDateTime } from "./ExifDateTime.ts"
 import { ExifTool } from "./ExifTool.ts"
-import { expect, testImg } from "./_chai.spec.ts"
+import { expect, testImg, describe, it, afterAll as after } from "./_chai.spec.ts"
 
 describe("RewriteAllTagsTask", () => {
   for (const opts of [
@@ -17,7 +17,8 @@ describe("RewriteAllTagsTask", () => {
       after(() => exiftool.end())
 
       it("throws on missing input", async function () {
-        this.slow(500)
+        // @todo check on this later
+        // this.slow(500)
         return expect(
           exiftool.rewriteAllTags("missing.jpg", "ignored.jpg")
         ).to.be.rejectedWith(/Error opening file.+missing\.jpg/)

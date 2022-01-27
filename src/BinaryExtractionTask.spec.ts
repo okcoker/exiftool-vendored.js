@@ -1,10 +1,9 @@
-import assert from "assert"
-import path from "path"
+import { expect, sha1, tmpname, describe, it, afterAll as after } from "./_chai.spec.ts"
+import { BinaryExtractionTask } from "./BinaryExtractionTask.ts"
+import { ExifTool } from "./ExifTool.ts"
+import { path, assert } from "./deps.ts"
 
-import { expect, sha1, tmpname } from "./_chai.spec"
-import { BinaryExtractionTask } from "./BinaryExtractionTask"
-import { ExifTool } from "./ExifTool"
-
+const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
 const testDir = path.join(__dirname, "..", "test")
 describe("BinaryExtractionTask", () => {
   const exiftool = new ExifTool({ maxProcs: 1 })
@@ -35,7 +34,8 @@ describe("BinaryExtractionTask", () => {
   })
 
   it("extracts expected thumb", async function () {
-    this.slow(500)
+    // @todo check on this later
+    // this.slow(500)
     const src = path.join(testDir, "with_thumb.jpg")
     const dest = await tmpname()
     await exiftool.extractThumbnail(src, dest)
@@ -44,7 +44,8 @@ describe("BinaryExtractionTask", () => {
   })
 
   it("throws for missing src", async function () {
-    this.slow(500)
+    // @todo check on this later
+    // this.slow(500)
     const src = path.join(testDir, "nonexistant-file.jpg")
     const dest = await tmpname()
     try {
@@ -56,7 +57,8 @@ describe("BinaryExtractionTask", () => {
   })
 
   it("throws for missing thumb", async function () {
-    this.slow(500)
+    // @todo check on this later
+    // this.slow(500)
     const src = path.join(testDir, "with_thumb.jpg")
     const dest = await tmpname()
     try {
