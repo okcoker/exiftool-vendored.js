@@ -9,10 +9,11 @@ export class VersionTask extends ExifToolTask<string> {
 
 	protected parse(input: string): string {
 		const value = input.trim();
+
 		if (VersionTask.versionRegex.test(value)) {
 			return value;
-		} else {
-			throw new Error(`Unexpected version ${value}`);
 		}
+
+		throw new Error(`Unexpected version ${value}`);
 	}
 }

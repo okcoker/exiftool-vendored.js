@@ -6,7 +6,7 @@ import { ExifTime } from './ExifTime.ts';
 import { DefaultMaxProcs, ExifTool, exiftool, WriteTags } from './ExifTool.ts';
 import { parseJSON } from './JSON.ts';
 import { keys } from './Object.ts';
-// import { leftPad } from "./String.ts"
+import { leftPad } from "./String.ts"
 import { Tags } from './Tags.ts';
 import {
 	afterAll as after,
@@ -32,9 +32,8 @@ function posixPath(path: string) {
 	return path.split(_path.sep).join('/');
 }
 
-after(() => exiftool.end());
-
 describe('ExifTool', function () {
+	// after(async () => await exiftool.end());
 	// @todo check on this later
 	// this.timeout(15000)
 	// this.slow(100)
@@ -49,7 +48,7 @@ describe('ExifTool', function () {
 	// const packageJson = require("../package.json")
 
 	function expectedExiftoolVersion(flavor: 'exe' | 'pl' = 'pl'): string {
-		return '12.39.0';
+		const vendorVersion = '12.39.0';
 		// @todo check this stuff
 		// const vendorVersion: string =
 		//   packageJson.optionalDependencies["exiftool-vendored." + flavor]
@@ -59,12 +58,12 @@ describe('ExifTool', function () {
 
 		// // vendorVersion might have a ^ or ~ or something else as a prefix, so get
 		// // rid of that:
-		// return vendorVersion
-		//   .replace(/^[^.0-9]+/, "")
-		//   .split(".")
-		//   .slice(0, 2)
-		//   .map((ea) => leftPad(ea, 2, "0"))
-		//   .join(".")
+		return vendorVersion
+		  .replace(/^[^.0-9]+/, "")
+		  .split(".")
+		  .slice(0, 2)
+		  .map((ea) => leftPad(ea, 2, "0"))
+		  .join(".")
 	}
 
 	it('perl and win32 versions match', () => {

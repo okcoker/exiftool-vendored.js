@@ -22,9 +22,9 @@ function parse(tags: any, err?: Error): Tags {
 	return tt['parse'](json, err);
 }
 
-after(() => exiftool.end());
-
 describe('ReadTask', () => {
+	after(() => exiftool.end());
+
 	describe('Lat/Lon parsing', () => {
 		/* Example:
     $ exiftool -j -coordFormat '%.8f' -fast ../test-images/important/Apple_iPhone7Plus.jpg | grep itude

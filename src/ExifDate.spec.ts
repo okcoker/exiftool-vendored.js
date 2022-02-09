@@ -12,7 +12,7 @@ describe('ExifDate', () => {
 			{ text: 'April 09 2018', iso: '2018-04-09' },
 		]
 	) {
-		it('parses ' + iso, () => {
+		it(`parses ${iso} (${text})`, () => {
 			const ed = ExifDate.fromEXIF(text);
 			expect(ed?.toISOString()).to.eql(iso);
 			expect(ed?.rawValue).to.eql(text);
