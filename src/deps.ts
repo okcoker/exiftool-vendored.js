@@ -16,33 +16,33 @@ export { copyFile } from 'https://deno.land/std@0.122.0/node/fs/promises.ts';
 export { assert, path };
 
 export const getOSTempDir = () =>
-	Deno.env.get('TMPDIR') || Deno.env.get('TMP') || Deno.env.get('TEMP') ||
-	'/tmp';
+    Deno.env.get('TMPDIR') || Deno.env.get('TMP') || Deno.env.get('TEMP') ||
+    '/tmp';
 
 export async function glob(root: string, pattern: string) {
-	const fullPath = path.join(root, pattern);
-	const regex = path.globToRegExp(fullPath);
-	const paths: string[] = [];
+    const fullPath = path.join(root, pattern);
+    const regex = path.globToRegExp(fullPath);
+    const paths: string[] = [];
 
-	for await (const entry of walk(root)) {
-		if (entry.path.match(regex)) {
-			paths.push(entry.path);
-		}
-	}
+    for await (const entry of walk(root)) {
+        if (entry.path.match(regex)) {
+            paths.push(entry.path);
+        }
+    }
 
-	return paths;
+    return paths;
 }
 
 export function globSync(root: string, pattern: string) {
-	const fullPath = path.join(root, pattern);
-	const regex = path.globToRegExp(fullPath);
-	const paths: string[] = [];
+    const fullPath = path.join(root, pattern);
+    const regex = path.globToRegExp(fullPath);
+    const paths: string[] = [];
 
-	for (const entry of walkSync(root)) {
-		if (entry.path.match(regex)) {
-			paths.push(entry.path);
-		}
-	}
+    for (const entry of walkSync(root)) {
+        if (entry.path.match(regex)) {
+            paths.push(entry.path);
+        }
+    }
 
-	return paths;
+    return paths;
 }
