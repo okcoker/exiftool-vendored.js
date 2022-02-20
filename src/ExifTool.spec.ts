@@ -9,8 +9,8 @@ import { keys } from './Object.ts';
 import { leftPad } from "./String.ts"
 import { Tags } from './Tags.ts';
 import {
-	afterAll as after,
-	beforeAll as before,
+	afterEach,
+	beforeEach,
 	describe,
 	expect,
 	isWin32,
@@ -91,13 +91,19 @@ describe('ExifTool', function () {
 		describe('exiftool({ ignoreShebang: ' + ignoreShebang + ' })', () => {
 			let et: ExifTool;
 
-			before(
-				() => (et = new ExifTool({
-					maxProcs: 2,
-					ignoreShebang,
-				})),
+			beforeEach(
+				() => {
+						et = new ExifTool({
+							maxProcs: 2,
+							ignoreShebang
+						});
+				}
 			);
-			after(() => et.end());
+			afterEach(async () => {
+				await et.end();
+				// Promises not fully settled so this is a hack for that
+				await new Promise((resolve) => setTimeout(resolve, 500));
+			});
 
 			it('returns the correct version', async function () {
 				// @todo check on this later
@@ -112,7 +118,7 @@ describe('ExifTool', function () {
 				expect(DefaultMaxProcs).to.be.within(1, 64);
 			});
 
-			it('returns expected results for a given file', async function () {
+			it('returns expected results for a given file', function () {
 				// @todo check on this later
 				// this.slow(500)
 				return expect(
@@ -120,7 +126,7 @@ describe('ExifTool', function () {
 				).to.eventually.eql('iPhone 7 Plus');
 			});
 
-			it('returns raw tag values', async () => {
+			it('returns raw tag values', () => {
 				return expect(et.readRaw(img, ['-Make', '-Model'])).to
 					.eventually.eql({
 						Make: 'Apple',
@@ -129,7 +135,7 @@ describe('ExifTool', function () {
 					}); // and nothing else
 			});
 
-			it('returns expected results for a given file with non-english filename', async function () {
+			it('returns expected results for a given file with non-english filename', function () {
 				// @todo check on this later
 				// this.slow(500)
 				return expect(
@@ -478,6 +484,8 @@ describe('ExifTool', function () {
 			expect(t2.SubSecCreateDate).to.eql(t.SubSecCreateDate);
 			expect(t2.GPSDateTime).to.eql(t.GPSDateTime);
 			expect(t2.GPSDateStamp).to.eql(t.GPSDateStamp);
+
+			await new Promise((resolve) => setTimeout(resolve, 500));
 		});
 	});
 });

@@ -38,7 +38,7 @@ const __dirname = _path.join(_path.fromFileUrl(import.meta.url));
 const isWin32 = lazy(() => Deno.build.os === 'windows');
 
 function findExiftool(): string {
-	const path: string = _path.join(__dirname, '../../bin/exiftool');
+	const path: string = _path.join('/usr/local/bin/exiftool');
 	// This s/app.asar/app.asar.unpacked/ path switch adds support for Electron
 	// apps that are ASAR-packed.
 
@@ -229,6 +229,8 @@ export const DefaultExifToolOptions: Omit<
 	taskTimeoutMillis: 20000,
 	onIdleIntervalMillis: 2000,
 	taskRetries: 1,
+	stdoutBuffer: 1024 * 4,
+	stderrBuffer: 1024 * 4,
 	exiftoolPath: DefaultExifToolPath,
 	exiftoolArgs: DefaultExiftoolArgs,
 	exiftoolEnv: {},
@@ -268,11 +270,11 @@ export class ExifTool {
 		};
 		const ignoreShebang = o.ignoreShebang ?? _ignoreShebang();
 
-		const env: any = { ...o.exiftoolEnv, LANG: 'C' };
+		const env: {[key: string]: string; } = { ...o.exiftoolEnv, LANG: 'C' };
 		if (
 			notBlank(Deno.env.get('EXIFTOOL_HOME')) && blank(env.EXIFTOOL_HOME)
 		) {
-			env.EXIFTOOL_HOME = Deno.env.get('EXIFTOOL_HOME');
+			env.EXIFTOOL_HOME = Deno.env.get('EXIFTOOL_HOME') || '';
 		}
 		const spawnOpts: Deno.RunOptions = {
 			cmd: [],

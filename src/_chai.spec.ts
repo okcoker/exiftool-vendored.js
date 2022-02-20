@@ -7,8 +7,7 @@ import {
 	beforeAll,
 	beforeEach,
 	describe,
-	it,
-	test,
+	it
 } from 'https://deno.land/x/test_suite@0.9.5/mod.ts';
 import {
 	BatchCluster,
@@ -106,6 +105,5 @@ export {
 	beforeEach,
 	describe,
 	expect,
-	it,
-	test,
+	it
 };
