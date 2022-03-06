@@ -8,7 +8,7 @@ import {
     beforeEach,
     describe,
     it,
-} from 'https://deno.land/x/test_suite@0.9.5/mod.ts';
+} from 'https://deno.land/x/test_suite@0.10.2/mod.ts';
 import {
     BatchCluster,
     Buffer,
@@ -96,6 +96,26 @@ export async function sha1buffer(input: string | Buffer): Promise<string> {
 
 export function isWin32() {
     return Deno.build.os === 'windows';
+}
+
+export function getOpenOps() {
+    const metrics = Deno.metrics();
+
+    return {
+        ...metrics,
+        ops: Object.keys(metrics.ops).reduce((acc: any, key: string) => {
+            const op = metrics.ops[key];
+
+            if (!op) {
+                console.log('Missing op for key', key);
+            }
+
+            if (op && op.opsCompleted !== op.opsDispatched) {
+                acc[key] = op;
+            }
+            return acc;
+        }, {}),
+    };
 }
 
 export { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it };

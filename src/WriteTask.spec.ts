@@ -8,7 +8,7 @@ import { stripSuffix } from './String.ts';
 import { Struct } from './Struct.ts';
 import { Tags } from './Tags.ts';
 import {
-    afterAll as after,
+    afterAll,
     describe,
     expect,
     it,
@@ -29,7 +29,7 @@ describe('WriteTask', function () {
     ) {
         describe(`new ExifTool(${JSON.stringify(opts)})`, () => {
             const exiftool = new ExifTool(opts);
-            after(() => exiftool.end());
+            afterAll(() => exiftool.end());
 
             type InputValue = string | number | Struct;
 
